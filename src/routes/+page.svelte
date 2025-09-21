@@ -36,11 +36,11 @@
 	}
 </script>
 
-<main class="flex h-full w-full flex-col items-center justify-center bg-background p-4">
+<main class="flex h-full w-full flex-col items-center justify-center bg-bg-dark p-4">
 	<div class="w-full max-w-sm text-center">
 		<div class="mb-6 text-6xl">📼</div>
-		<h1 class="font-display mb-2 text-3xl font-bold text-white">Canal Nostalgia</h1>
-		<p class="mb-8 text-subtle">Sua central de desenhos 24h.</p>
+		<h1 class="mb-2 text-3xl font-bold text-text-primary">Canal Nostalgia</h1>
+		<p class="mb-8 text-text-secondary">Sua central de desenhos 24h.</p>
 
 		<form on:submit|preventDefault={connect} class="flex flex-col gap-4">
 			<div>
@@ -50,7 +50,7 @@
 					bind:value={currentIp}
 					type="text"
 					placeholder="Ex: 192.168.0.1"
-					class="w-full rounded-lg border-2 border-surface bg-surface px-4 py-3 text-center text-lg text-white/90 transition-colors duration-200 focus:border-primary focus:outline-none focus:ring-0"
+					class="w-full rounded-lg border-2 border-bg-surface bg-bg-surface px-4 py-3 text-center text-lg text-text-primary transition-colors duration-200 focus:border-primary-brand focus:outline-none focus:ring-0"
 				/>
 			</div>
 
@@ -60,7 +60,7 @@
 
 			<button
 				type="submit"
-				class="rounded-lg bg-primary px-4 py-3 font-display text-lg font-bold text-white transition-transform duration-200 hover:scale-105 hover:bg-primary-hover active:scale-100"
+				class="rounded-lg bg-primary-brand px-4 py-3 text-lg font-bold text-white transition-transform duration-200 hover:scale-105 active:scale-100"
 			>
 				Conectar
 			</button>

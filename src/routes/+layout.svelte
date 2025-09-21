@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-    import { theme } from '$lib/stores/theme';
 </script>
 
 <svelte:head>
@@ -11,7 +10,5 @@
 		rel="stylesheet"
 	/>
 </svelte:head>
-
-<svelte:document html:data-theme={$theme === 'default' ? null : $theme} />
 
 <slot />
