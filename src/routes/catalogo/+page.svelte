@@ -102,4 +102,21 @@
 									class="aspect-[2/3] w-full object-cover"
 									loading="lazy"
 								/>
+							</div>
+							<p class="truncate text-center font-semibold transition-colors group-hover:text-primary">
+								{desenho.nome}
+							</p>
+						</a>
+					</div>
+				{/each}
+			</div>
+		{:else}
+			<div class="flex flex-col items-center justify-center rounded-lg bg-surface p-12 text-center">
+				<div class="text-4xl">😵</div>
+				<p class="mt-4 font-semibold">{connectionStatus}</p>
+				<button on:click={connectAndFetchCatalog} class="mt-6 rounded-full bg-primary px-6 py-3 font-bold">Tentar Novamente</button>
+			</div>
+		{/if}
+	</div>
+</main>
 
