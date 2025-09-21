@@ -1,0 +1,32 @@
+/* src/app.css (VERSÃO ATUALIZADA) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply bg-background text-white/90 font-sans;
+	/* Transição suave de cores ao trocar de tema */
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema Padrão (Roxo) já está no tailwind.config.ts */
+
+/* Tema Nostalgia (Tons quentes) */
+[data-theme="nostalgia"] {
+	--background: #201b1b;
+	--surface: #2d2626;
+	--primary: #ff8a65;
+	--primary-hover: #ff7043;
+	--subtle: #bcaaa4;
+	--on-subtle: #4e4444;
+}
+
+/* Tema Matrix (Verde/Preto) */
+[data-theme="matrix"] {
+	--background: #0d0d0d;
+	--surface: #1a1a1a;
+	--primary: #00ff41;
+	--primary-hover: #39ff14;
+	--subtle: #008f11;
+	--on-subtle: #2a2a2a;
+}
