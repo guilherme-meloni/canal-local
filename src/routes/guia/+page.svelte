@@ -12,7 +12,8 @@
 	let isLoading = true;
 	let connectionStatus = 'Buscando sinal da emissora...';
 
-	type ScheduledItem = PlaylistItem & { horarioInicio: Date };
+	// Tipo atualizado para incluir o índice original do item na playlist
+	type ScheduledItem = PlaylistItem & { horarioInicio: Date; originalIndex: number };
 
 	onMount(() => {
 		if (!browser) return;
@@ -53,6 +54,7 @@
 	const formatTime = (date: Date) =>
 		date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
+	// Lógica de cálculo refatorada para ser mais robusta
 	$: programacaoComHorarios = (() => {
 		if (!playlist.length || currentItemIndex < 0 || !itemStartTime) {
 			return [];
@@ -64,7 +66,7 @@
 		let lastEndTime = itemStartTime;
 		for (let i = currentItemIndex; i < playlist.length; i++) {
 			const item = playlist[i];
-			processed[i] = { ...item, horarioInicio: new Date(lastEndTime) };
+			processed[i] = { ...item, horarioInicio: new Date(lastEndTime), originalIndex: i };
 			lastEndTime += item.duration * 1000;
 		}
 		
@@ -73,7 +75,7 @@
 		for (let i = currentItemIndex - 1; i >= 0; i--) {
 			const item = playlist[i];
 			const startTime = nextStartTime - item.duration * 1000;
-			processed[i] = { ...item, horarioInicio: new Date(startTime) };
+			processed[i] = { ...item, horarioInicio: new Date(startTime), originalIndex: i };
 			nextStartTime = startTime;
 		}
 
@@ -113,7 +115,8 @@
 			<div class="overflow-hidden rounded-lg border border-white/10 bg-surface/50">
 				<ul class="divide-y divide-white/10">
 					{#each programacaoComHorarios as item, i (item.src + i)}
-						{@const isNoAr = playlist[currentItemIndex]?.src === item.src}
+						<!-- CORREÇÃO: A verificação de "No Ar" agora usa o índice original, que é 100% fiável -->
+						{@const isNoAr = item.originalIndex === currentItemIndex}
 						{@const now = new Date()}
 						{@const startTime = new Date(item.horarioInicio)}
 						{@const endTime = new Date(startTime.getTime() + item.duration * 1000)}
